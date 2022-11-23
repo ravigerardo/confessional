@@ -1,3 +1,10 @@
+$primary: rgb(180, 7, 7);
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'actiontext.css';
+@import 'sign_in';
+@import 'utils';
+
+body {
+  background-color: #f5f5f5;
+}

@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/navbar' if user_signed_in? %>
+    <main class="container mt-3">
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  root 'users#show'
+  root 'users/profiles#show'
 
-  devise_for :users
-  get '/:username', to: 'users#show', as: :user
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+  get '/:username', to: 'users/profiles#show', as: :user
 end
