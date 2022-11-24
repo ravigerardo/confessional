@@ -1,0 +1,26 @@
+<%= form_with(model: current_user, url: users_profile_path, data: { turbo: false }) do |f| %>
+  <h2>Edit profile</h2>
+  
+  <div class="mb-3">
+    <%= f.file_field :avatar, class: 'd-none' %>
+    <%= f.label :avatar, 'Selccionar imagen', class: 'btn btn-primary d-grid' %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control" %>
+    <%= f.label :username %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= f.text_field :name, autocomplete: "name", class: "form-control" %>
+    <%= f.label :name %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.rich_text_area :about, class: "form-control", placeholder: "About you" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.submit "Update", class: "w-100 btn btn-lg btn-primary" %>
+  </div>
+<% end %>

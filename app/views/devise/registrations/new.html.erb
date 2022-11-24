@@ -9,6 +9,11 @@
     </div>
     
     <div class="form-floating mb-3">
+      <%= f.text_field :name, autocomplete: "name", class: "form-control" %>
+      <%= f.label :name %>
+    </div>
+    
+    <div class="form-floating mb-3">
       <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
       <%= f.label :email %>
     </div>

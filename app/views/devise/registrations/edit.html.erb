@@ -1,40 +1,20 @@
-<div class="form-session" style="margin-top: 0; max-width: 600px;">
-  <h2>Edit acount</h2>
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="form-floating mb-3">
-      <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control" %>
-      <%= f.label :username %>
-    </div>
-
-    <div class="form-floating mb-3">
-      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
-      <%= f.label :email %>
-    </div>
-
-    <div class="form-floating mb-3">
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-      <%= f.label :password %> <small>(leave blank if you don't want to change it)</small>
-    </div>
-
-    <div class="form-floating mb-3">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-      <%= f.label :password_confirmation %>
-    </div>
-
-    <div class="form-floating mb-3">
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-      <%= f.label :current_password %> <small>(we need your current password to confirm your changes)</small>
-    </div>
-
-    <div class="mb-4">
-      <%= f.submit "Update", class: "w-100 btn btn-lg btn-primary" %>
-    </div>
-  <% end %>
-
-  <h3>Cancel my account</h3>
-
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">
+      <i class="fa-regular fa-address-card me-1"></i> Profile
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-acount-tab" data-bs-toggle="pill" data-bs-target="#pills-acount" type="button" role="tab" aria-controls="pills-acount" aria-selected="false">
+      <i class="fa-solid fa-at me-1"></i> Acount
+    </button>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+    <%= render 'devise/registrations/form_profile' %>
+  </div>
+  <div class="tab-pane fade" id="pills-acount" role="tabpanel" aria-labelledby="pills-acount-tab" tabindex="0">
+    <%= render 'devise/registrations/form_acount' %>
+  </div>
 </div>
