@@ -1,3 +1,13 @@
-<%= image_tag @user.avatar.variant(:large), class: 'card-img-top mx-auto', style: "border-radius: 50%; max-width: 250px;", width: '100%', height: '100%', alt: 'Avatar' if @user.avatar.attached? %>
-<h1><%= @user.username %></h1>
-<%= @user.about %>
+<div class="row mt-3">
+  <div class="col-md-auto pe-5 text-center">
+  <%= image_tag @user.avatar.variant(:large), class: 'avatar-profile', width: '100%', height: 'auto', alt: 'Avatar' if @user.avatar.attached? %>
+    <h2><%= @user.name %></h2>
+    <p>
+    <strong>Username: </strong><%= @user.username %><br>
+    <strong>Created at: </strong><%= @user.created_at.strftime('%b %Y') %>
+    </p>
+  </div>
+  <div class="col">
+    <%= @user.about %>
+  </div>
+</div>
