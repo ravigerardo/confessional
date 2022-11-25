@@ -1,7 +1,8 @@
 class Users::ProfilesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[ edit ]
+
   def show
-    @user = current_user
+    @user = User.find_by(username: params[:username]) or not_found
   end
 
   def edit

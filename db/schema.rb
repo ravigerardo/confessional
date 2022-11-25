@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_23_170010) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_25_151547) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,6 +49,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_170010) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "uid"
+    t.string "name"
+    t.integer "from_id", null: false
+    t.integer "to_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id"], name: "index_chats_on_from_id"
+    t.index ["to_id"], name: "index_chats_on_to_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "name", default: "", null: false
@@ -72,4 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_170010) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "users", column: "from_id"
+  add_foreign_key "chats", "users", column: "to_id"
 end

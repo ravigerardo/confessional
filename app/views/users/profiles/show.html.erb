@@ -6,8 +6,27 @@
     <strong>Username: </strong><%= @user.username %><br>
     <strong>Created at: </strong><%= @user.created_at.strftime('%b %Y') %>
     </p>
+    <% unless current_user == @user %>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#chatModal">
+        Start a new anonymous chat
+      </button>
+    <%end%>
   </div>
   <div class="col">
     <%= @user.about %>
+  </div>
+</div>
+
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="chatModalLabel">New chat with <%= @user.name.split.first %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'chats/form', user: @user %>
+      </div>
+    </div>
   </div>
 </div>

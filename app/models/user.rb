@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :chats, foreign_key: :from_id
   has_rich_text :about
   has_one_attached :avatar do |attachable|
     attachable.variant :small, resize_to_fill: [50, 50]

@@ -1,0 +1,16 @@
+<%= form_with(model: current_user.chats.new) do |form| %>
+  <%= form.hidden_field :to_id, value: user.id %>
+	<% first_name = user.name.split.first %>
+	<p class="lh-1">Assign a name for identify easily the chat, because you can create many chats with <%= first_name %>. <%= first_name %> will can read this name too.</p>
+
+	<div class="form-floating mb-3">
+    <%= form.text_field :name, class: "form-control" %>
+    <%= form.label :name %>
+  </div>
+
+	<p class="text-muted fst-italic lh-1"><small>Your identity will be hidden. You will chat with <%= first_name %> in anonymous mode, but after you can reveal your identity if you want.</small></p>
+
+	<div class="d-grid">
+		<%= form.submit 'Create anonymous chat', class: "btn btn-primary" %>
+	</div>
+<% end %>
