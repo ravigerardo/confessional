@@ -6,9 +6,10 @@ class ChatsController < ApplicationController
   def index
     @chats = Chat.with_user(current_user.id)
   end
-
+  
   # GET /chats/1 or /chats/1.json
   def show
+    unauthorized unless current_user.in_chat? @chat
   end
 
   # POST /chats or /chats.json
@@ -39,7 +40,7 @@ class ChatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat
-      @chat = Chat.find(params[:id])
+      @chat = Chat.find_by(uid: params[:uid])
     end
 
     # Only allow a list of trusted parameters through.

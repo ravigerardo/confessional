@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     patch '/profile', to: 'profiles#edit'
   end
   
-  resources :chats, only: %i[ index show create delete ]
+  resources :chats, only: %i[ index show create destroy ], param: :uid
 
   get '/:username', to: 'users/profiles#show', as: :user
 end

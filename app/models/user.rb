@@ -18,6 +18,10 @@ class User < ApplicationRecord
     self.update(active?: false)
   end
 
+  def in_chat?(chat)
+    chat.from_id == self.id || chat.to_id == self.id
+  end
+
   private
     def avatar_validation
       if avatar.attached?
