@@ -5,4 +5,7 @@
 import { application } from "./application"
 
 import TrixController from "./trix_controller"
+import ChatController from "./chat_controller"
+
 application.register("trix", TrixController)
+application.register("chat", ChatController)

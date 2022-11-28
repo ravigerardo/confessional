@@ -10,6 +10,7 @@ class ChatsController < ApplicationController
   # GET /chats/1 or /chats/1.json
   def show
     unauthorized unless current_user.in_chat? @chat
+    ActionCable.server.broadcast("chat_#{@chat.uid}", { body: "This Room is Best Room." })
   end
 
   # POST /chats or /chats.json
@@ -18,7 +19,7 @@ class ChatsController < ApplicationController
 
     respond_to do |format|
       if @chat.save
-        format.html { redirect_to chat_url(@chat), notice: "Chat was successfully created." }
+        format.html { redirect_to chat_url(@chat.uid), notice: "Chat was successfully created." }
         format.json { render :show, status: :created, location: @chat }
       else
         format.html { render :new, status: :unprocessable_entity }
