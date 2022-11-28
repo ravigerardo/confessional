@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_151547) do
   create_table "chats", force: :cascade do |t|
     t.string "uid"
     t.string "name"
+    t.boolean "anonymous?", default: true, null: false
     t.integer "from_id", null: false
     t.integer "to_id", null: false
     t.datetime "created_at", null: false
