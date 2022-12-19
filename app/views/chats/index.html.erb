@@ -1,7 +1,8 @@
 <div id="chats">
   <% @chats.each do |chat| %>
     <%= link_to chat_path(chat.uid), class: 'text-decoration-none' do %>
-      <div class="card card-check bg-secondary text-dark mb-3" style="--bs-bg-opacity: .1;">
+      <div class="card card-check <%= 'card-check--active' unless chat.user_id_last_message == current_user.id %> bg-secondary text-dark mb-3" 
+        style="--bs-bg-opacity: .1;">
         <div class="card-body">
           <h4><%= chat.name %></h4>
           <small>

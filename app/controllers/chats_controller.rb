@@ -3,7 +3,7 @@ class ChatsController < ApplicationController
   before_action :set_chat, only: %i[ show destroy message ]
 
   def index
-    @chats = Chat.with_user(current_user.id)
+    @chats = Chat.for_home(current_user.id)
   end
 
   def show
