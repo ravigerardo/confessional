@@ -7,7 +7,6 @@ export default class extends Controller {
 
   connect() {
     this.conectChanel()
-    console.log(consumer.subscriptions)
     messages.scroll({ top: messages.scrollHeight })
   }
 
@@ -22,7 +21,6 @@ export default class extends Controller {
     message.value = ''
     messages.append(p)
     messages.scroll({ top: messages.scrollHeight })
-    console.log(consumer.subscriptions)
   }
 
   conectChanel() {
