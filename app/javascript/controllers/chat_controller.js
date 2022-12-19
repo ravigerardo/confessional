@@ -16,6 +16,9 @@ export default class extends Controller {
     let p = document.createElement("p")
     p.appendChild(value)
     p.classList.add('message')
+    if (current_user_id.value == new_message.user_id) {
+      p.classList.add('bg-primary')
+    }
     message.value = ''
     messages.append(p)
     messages.scroll({ top: messages.scrollHeight })
@@ -24,7 +27,7 @@ export default class extends Controller {
 
   conectChanel() {
     this.suscription = consumer.subscriptions.create(
-      { channel: "ChatChannel", uid: chat_uid.value, token: current_user_username.value },
+      { channel: "ChatChannel", uid: chat_uid.value },
       { received: (data) => { this.receivedMessage(data) } }
     )
   }

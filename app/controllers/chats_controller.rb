@@ -38,7 +38,7 @@ class ChatsController < ApplicationController
     
     @message = @chat.messages.new(value: params[:message], user_id: current_user.id)
     if @message.save
-      ActionCable.server.broadcast("chat_#{@chat.uid}", { message: @message.value })
+      ActionCable.server.broadcast("chat_#{@chat.uid}", { message: @message.value, user_id: current_user.id })
       render json: {message: @message.value}, status: :created
     else
       render json: {message: @message.error}, status: :unprocessable_entity

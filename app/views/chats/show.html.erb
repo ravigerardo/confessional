@@ -1,12 +1,15 @@
 <div data-controller="chat" class="card">
   <%= hidden_field_tag :chat_uid, @chat.uid %>
-  <%= hidden_field_tag :current_user_username, current_user.username %>
+  <%= hidden_field_tag :current_user_id, current_user.id %>
+
   <div class="card-header">
     <h3><%= @chat.name %></h3>
   </div>
   <div id="messages" class="card-body" style="height: 25rem; overflow: scroll;">
     <% @chat.messages.each do |message| %>
-      <p class="message"><%= message.value %></p>
+      <p class="message <%= 'bg-primary' if message.user == current_user %>">
+        <%= message.value %>
+      </p>
     <%end%>
   </div>
   <div class="card-footer">
