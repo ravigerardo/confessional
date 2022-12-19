@@ -15,3 +15,11 @@
 .card-check--active::before {
   background-color: $primary;
 }
+
+.message {
+  background-color: $secondary;
+  color: $white;
+  padding: 0.3rem 1.3rem;
+  border-radius: 3px;
+  width: fit-content;
+}

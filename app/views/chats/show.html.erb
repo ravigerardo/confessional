@@ -1,17 +1,22 @@
 <div data-controller="chat" class="card">
   <%= hidden_field_tag :chat_uid, @chat.uid %>
+  <%= hidden_field_tag :current_user_username, current_user.username %>
   <div class="card-header">
     <h3><%= @chat.name %></h3>
   </div>
-  <div class="card-body" style="height: 25rem; overflow: scroll;">
-    
+  <div id="messages" class="card-body" style="height: 25rem; overflow: scroll;">
+    <% @chat.messages.each do |message| %>
+      <p class="message"><%= message.value %></p>
+    <%end%>
   </div>
   <div class="card-footer">
-    <div class="input-group">
-      <%= text_field_tag :message, nil, class: 'form-control' %>
-      <button class="btn btn-primary">
-        <i class="fa-solid fa-paper-plane"></i> Send
-      </button>
-    </div>
+    <%= form_with(url: message_path(@chat.uid), method: 'post') do %>
+      <div class="input-group">
+        <%= text_field_tag :message, nil, class: 'form-control', autocomplete: 'off' %>
+        <button class="btn btn-primary">
+          <i class="fa-solid fa-paper-plane"></i> Send
+        </button>
+      </div>
+    <%end%>
   </div>
 </div>

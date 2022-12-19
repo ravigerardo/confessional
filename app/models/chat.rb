@@ -1,6 +1,7 @@
 class Chat < ApplicationRecord
   belongs_to :from, class_name: 'User'
   belongs_to :to, class_name: 'User'
+  has_many :messages
   before_create :generate_uid
 
   def self.with_user(user_id)

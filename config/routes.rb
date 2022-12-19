@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   
   resources :chats, only: %i[ index show create destroy ], param: :uid
+  post '/chats/:uid/message', to: 'chats#message', as: :message
 
   get '/:username', to: 'users/profiles#show', as: :user
 end

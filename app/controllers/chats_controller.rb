@@ -1,19 +1,15 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_chat, only: %i[ show destroy ]
+  before_action :set_chat, only: %i[ show destroy message ]
 
-  # GET /chats or /chats.json
   def index
     @chats = Chat.with_user(current_user.id)
   end
-  
-  # GET /chats/1 or /chats/1.json
+
   def show
     unauthorized unless current_user.in_chat? @chat
-    ActionCable.server.broadcast("chat_#{@chat.uid}", { body: "This Room is Best Room." })
   end
 
-  # POST /chats or /chats.json
   def create
     @chat = current_user.chats.new(chat_params)
 
@@ -28,7 +24,6 @@ class ChatsController < ApplicationController
     end
   end
 
-  # DELETE /chats/1 or /chats/1.json
   def destroy
     @chat.destroy
 
@@ -38,13 +33,23 @@ class ChatsController < ApplicationController
     end
   end
 
+  def message
+    unauthorized unless current_user.in_chat? @chat
+    
+    @message = @chat.messages.new(value: params[:message], user_id: current_user.id)
+    if @message.save
+      ActionCable.server.broadcast("chat_#{@chat.uid}", { message: @message.value })
+      render json: {message: @message.value}, status: :created
+    else
+      render json: {message: @message.error}, status: :unprocessable_entity
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_chat
       @chat = Chat.find_by(uid: params[:uid])
     end
 
-    # Only allow a list of trusted parameters through.
     def chat_params
       params.require(:chat).permit(:name, :to_id)
     end

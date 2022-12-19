@@ -7,8 +7,9 @@ class ChatChannel < ApplicationCable::Channel
   end
   
   def unsubscribed
+    stop_stream_from "chat_#{params[:uid]}"
     puts "#"*30
-    puts "Chat Subscribed"
+    puts "Chat Unsubscribed"
     puts "#"*30
   end
 end
