@@ -15,9 +15,10 @@ export default class extends Controller {
     let p = document.createElement("p")
     p.appendChild(value)
     p.classList.add('message')
-    if (current_user_id.value == new_message.user_id) {
+    if (public_user_id.value == new_message.public_user_id) {
       p.classList.add('bg-primary')
     }
+    console.log(public_user_id.value, new_message.public_user_id);
     message.value = ''
     messages.append(p)
     messages.scroll({ top: messages.scrollHeight })

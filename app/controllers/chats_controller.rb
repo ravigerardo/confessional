@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_chat, only: %i[ show destroy message ]
+  before_action :set_chat_and_public_user_id, only: %i[ show destroy message ]
 
   def index
     @chats = Chat.for_home(current_user.id)
@@ -38,16 +38,17 @@ class ChatsController < ApplicationController
     
     @message = @chat.messages.new(value: params[:message], user_id: current_user.id)
     if @message.save
-      ActionCable.server.broadcast("chat_#{@chat.uid}", { message: @message.value, user_id: current_user.id })
-      render json: {message: @message.value}, status: :created
+      ActionCable.server.broadcast("chat_#{@chat.uid}", { message: @message.value, public_user_id: @public_user_id })
+      render json: { message: @message.value }, status: :created
     else
-      render json: {message: @message.error}, status: :unprocessable_entity
+      render json: { message: @message.error }, status: :unprocessable_entity
     end
   end
 
   private
-    def set_chat
+    def set_chat_and_public_user_id
       @chat = Chat.find_by(uid: params[:uid])
+      @public_user_id = (current_user.id.to_s+@chat.uid.to_s).crypt("$rounds=1000$salt$")
     end
 
     def chat_params

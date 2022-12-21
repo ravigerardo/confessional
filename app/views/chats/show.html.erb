@@ -1,6 +1,6 @@
 <div data-controller="chat" class="card">
   <%= hidden_field_tag :chat_uid, @chat.uid %>
-  <%= hidden_field_tag :current_user_id, current_user.id %>
+  <%= hidden_field_tag :public_user_id, @public_user_id %>
 
   <div class="card-header">
     <h3><%= @chat.name %></h3>
