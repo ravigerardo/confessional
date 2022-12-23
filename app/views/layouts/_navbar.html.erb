@@ -55,9 +55,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">
-            <%= text_field_tag :'q[username_or_name_cont]', nil, autocomplete: 'off', class: "form-control transparent", placeholder: "Search a user" %>
-          </h5>
+          <%= text_field_tag :'q[username_or_name_cont]', nil, autocomplete: 'off', class: "form-control form-control-lg transparent", placeholder: "Search a user" %>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div id="users_list" class="modal-body list-group list-group-flush">
