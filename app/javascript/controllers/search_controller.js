@@ -5,11 +5,9 @@ export default class extends Controller {
 
   connect() {
     let modal = new Modal(search_modal)
+    search_modal.addEventListener('shown.bs.modal', () => q_username_or_name_cont.focus())
     this.search().then(users => this.set_users_in_list(users))
-    search_button.addEventListener('click', () => {
-      modal.show()
-      q_username_or_name_cont.focus()
-    })
+    search_button.addEventListener('click', () => modal.show())
     q_username_or_name_cont.addEventListener('keyup', () => {
       this.search().then(users => this.set_users_in_list(users))
     })
