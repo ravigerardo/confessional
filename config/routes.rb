@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   }
   
   namespace :users do
+    get '/search', to: 'profiles#search'
     patch '/profile', to: 'profiles#edit'
   end
   

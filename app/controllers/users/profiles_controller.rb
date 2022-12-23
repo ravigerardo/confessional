@@ -1,5 +1,14 @@
 class Users::ProfilesController < ApplicationController
   before_action :authenticate_user!, only: %i[ show edit ]
+  skip_forgery_protection
+
+  def search
+    @users = User.ransack(params[:q])
+                  .result(distinct: true)
+                  .select(:username, :name)
+                  .limit(6)
+    render json: @users
+  end
 
   def show
     @user = User.find_by(username: params[:username]) or not_found
